@@ -2,11 +2,10 @@
 
 git pull
 
-composer install
-composer update
-sleep 10
 docker compose up -d
 sleep 10
+composer install
+composer update
 
 php artisan migrate
 
