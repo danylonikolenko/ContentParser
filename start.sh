@@ -1,9 +1,12 @@
 #!/bin/bash
 
-composer install
-docker compose up -d
+git pull
 
-sleep 20
+composer install
+composer update
+sleep 10
+docker compose up -d
+sleep 10
 
 php artisan migrate
 php artisan serve
