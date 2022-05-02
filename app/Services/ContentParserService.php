@@ -4,6 +4,8 @@
 namespace App\Services;
 
 
+use App\Dto\ContentDto;
+
 class ContentParserService
 {
     private DbService $dbService;
@@ -41,6 +43,10 @@ class ContentParserService
         return true;
     }
 
+    /**
+     * @param array $dbs
+     * @return ContentDto[]
+     */
     public function getContent(array $dbs): array
     {
         $result = [];

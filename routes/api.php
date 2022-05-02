@@ -20,5 +20,6 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::post('/download_content', [ContentParserController::class , 'downloadContent'])->name('download.content');
+Route::get('/get_content/{db}', [ContentParserController::class , 'getContent'])->name('get.content');
 Route::post('/parse_content', [ContentParserController::class , 'parseContent'])->name('parse.content');
 Route::post('/drop_db', [ContentParserController::class , 'dropDb'])->name('db.drop');

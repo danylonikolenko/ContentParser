@@ -47,6 +47,12 @@
             </tbody>
         </table>
         <button type="button" class="btn btn-success download">Get .txt</button>
+
+        <div class="links">
+            @foreach($databases as $database)
+                <a href="{{route('get.content', ['db' => $database])}}">{{route('get.content', ['db' => $database])}}</a>
+            @endforeach
+        </div>
     @endif
 </div>
 </body>
@@ -124,6 +130,14 @@
 </html>
 
 <style>
+    a{
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+    .links{
+        display: grid;
+    }
+
     .content {
         width: 100%;
         display: grid;

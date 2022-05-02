@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 
 
 use App\Services\ContentParserService;
+use App\Services\DbExport;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ContentParserController extends Controller
 {
@@ -63,6 +67,16 @@ class ContentParserController extends Controller
         $databases = $request->dbs ?? [];
         $result = $this->contentParserService->getContent($databases);
         return response()->json($result);
+    }
+
+    public function getContent(Request $request): BinaryFileResponse
+    {
+        $databases = [$request->db] ?? [];
+        $result = $this->contentParserService->getContent($databases);
+        $result = json_decode(json_encode($result), true);
+        $export = new DbExport($result);
+
+        return Excel::download($export, 'articles.xlsx');
     }
 
 
